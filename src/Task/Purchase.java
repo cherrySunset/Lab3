@@ -1,23 +1,24 @@
 package Task;
 
-public class Purchase {
+
+public class Purchase implements Comparable<Purchase> {
     private String productName;
     private double priceInEuro;
     private int numberOfPurchasedUnits;
     private int discountPercent;
-    private enum weekDay{
-       MONDAY,
-        TUESDAY,
-        WEDNESDAY,
-        THURSDAY,
-        FRIDAY,
-        SATURDAY,
-        SUNDAY
-    }
+    private WeekDays weekDay;
 
 
     public Purchase() {
 
+    }
+
+    public Purchase(String productName, double priceInEuro, int numberOfPurchasedUnits, int discountPercent, WeekDays weekDay) {
+        this.productName = productName;
+        this.priceInEuro = priceInEuro;
+        this.numberOfPurchasedUnits = numberOfPurchasedUnits;
+        this.discountPercent = discountPercent;
+        this.weekDay = weekDay;
     }
 
     public String getProductName() {
@@ -52,11 +53,11 @@ public class Purchase {
         this.discountPercent = discountPercent;
     }
 
-    public String getWeekDay() {
+    public WeekDays getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(String weekDay) {
+    public void setWeekDay(WeekDays weekDay) {
         this.weekDay = weekDay;
     }
 
@@ -67,9 +68,11 @@ public class Purchase {
     public String toString() {
         return priceInEuro + ";" + numberOfPurchasedUnits + ";" + discountPercent + ";" + weekDay + ";" + getCost();
     }
-public int compareTo(){
-        return 0;
-}
 
+
+    @Override
+    public int compareTo(Purchase purchase) {
+        return this.getNumberOfPurchasedUnits() - purchase.getNumberOfPurchasedUnits();
+    }
 
 }
